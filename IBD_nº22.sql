@@ -259,16 +259,6 @@ VALUES
     (111111111, 916582368, "+351");
 
 INSERT INTO
-    property (pid, area)
-VALUES
-    (314, 2134.50);
-
-INSERT INTO
-    property_belongs_to_owner (property_id, landowner_VAT)
-VALUES
-    (314, 111111111);
-
-INSERT INTO
     district (did, name)
 VALUES
     (265, "Setúbal");
@@ -282,6 +272,16 @@ INSERT INTO
     parish (pid, municipality_id, name)
 VALUES
     (779, 7570, "Carvalhal");
+
+INSERT INTO
+    property (pid, area, parish_id)
+VALUES
+    (314, 2134.50, 779);
+
+INSERT INTO
+    property_belongs_to_owner (property_id, landowner_VAT)
+VALUES
+    (314, 111111111);
 
 INSERT INTO
     stand (sid, property_id, area, year, species)
