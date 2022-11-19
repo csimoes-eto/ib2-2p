@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS `district`,
 `product_in_storehouse_is_for_sale`,
 `product_stored_in_storehouse`,
 `property`,
-`property_belongs_to_owner`,
 `sale`,
 `sale_profit_distributed_to_owner`,
 `spouse`,
@@ -57,16 +56,10 @@ CREATE TABLE property (
     pid NUMERIC (9),
     area NUMERIC (25, 2) NOT NULL,
     parish_id NUMERIC(9),
-    FOREIGN KEY (parish_id) REFERENCES parish (pid),
-    CONSTRAINT pk_property PRIMARY KEY (pid)
-);
-
-CREATE TABLE property_belongs_to_owner (
-    property_id NUMERIC(9),
     landowner_VAT NUMERIC(9),
-    FOREIGN KEY (property_id) REFERENCES property (pid) ON DELETE CASCADE,
+    FOREIGN KEY (parish_id) REFERENCES parish (pid),
     FOREIGN KEY (landowner_VAT) REFERENCES landowner (VAT) ON DELETE CASCADE,
-    CONSTRAINT pk_property_belongs_to_owner PRIMARY KEY (property_id, landowner_VAT)
+    CONSTRAINT pk_property PRIMARY KEY (pid)
 );
 
 CREATE TABLE parish (
@@ -274,14 +267,9 @@ VALUES
     (779, 7570, "Carvalhal");
 
 INSERT INTO
-    property (pid, area, parish_id)
+    property (pid, area, parish_id, landowner_VAT)
 VALUES
-    (314, 2134.50, 779);
-
-INSERT INTO
-    property_belongs_to_owner (property_id, landowner_VAT)
-VALUES
-    (314, 111111111);
+    (314, 2134.50, 779, 111111111);
 
 INSERT INTO
     stand (sid, property_id, area, year, species)
