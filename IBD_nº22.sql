@@ -56,6 +56,8 @@ CREATE TABLE phone (
 CREATE TABLE property (
     pid NUMERIC (9),
     area NUMERIC (25, 2) NOT NULL,
+    parish_id NUMERIC(9),
+    FOREIGN KEY (parish_id) REFERENCES parish (pid),
     CONSTRAINT pk_property PRIMARY KEY (pid)
 );
 
